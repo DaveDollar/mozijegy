@@ -1,16 +1,24 @@
 from tkinter import *
 from tkinter import messagebox
-from tkinter import ttk
+from tkinter import ttk, Canvas
 from ttkbootstrap import *
 from ttkbootstrap import Style, Window
 from PIL import Image, ImageTk
+import os
+
+def getpath():
+    path = os.path.abspath(os.getcwd())
+    ujpath = path.replace('\\','/')
+    return ujpath
+path = getpath()
 
 def filmek():
+    global tpl1
     tpl1 = Toplevel()
     tpl1.title("Filmek")
     tpl1.geometry("1000x600")
     tpl1.resizable(False, False)
-    tpl1.iconbitmap('J:\Python\mozijegy\imgs\cinema.ico')
+    tpl1.iconbitmap(path+'/imgs/cinema.ico')
     cim = Label(tpl1, text='Filmek:', font=('Helvetica', 25))
     cim.pack(pady=10)
     style = Style()
@@ -18,23 +26,44 @@ def filmek():
     mb = ttk.Menubutton(tpl1, text="Válassz filmet!", style='Outline.TMenubutton', direction='below')
     mb.pack()
     menu = Menu(mb, tearoff=False)
-    menu.add_command(label='Option 1', command=lambda: on_menu_select('Option 1'))
-    menu.add_command(label='Option 2', command=lambda: on_menu_select('Option 2'))
-    menu.add_command(label='Option 3', command=lambda: on_menu_select('Option 3'))
+    menu.add_command(label='A MÉHÉSZ', command=on_menu_select)
+    menu.add_command(label='DEMON SLAYER - TO THE HASHIRA TRAINING (KIMETSU NO YAIBA)', command=lambda: on_menu_select(1))
+    menu.add_command(label='DŰNE - MÁSODIK RÉSZ', command=lambda: on_menu_select(2))
+    menu.add_command(label='MADAME WEB', command=lambda: on_menu_select(3))
+    menu.add_command(label='IMÁDLAK UTÁLNI', command=lambda: on_menu_select(4))
     mb.config(menu=menu)
     tpl1.mainloop()
 
-def on_menu_select(choice):
-    print("Selected:", choice)
+
+def on_menu_select():
+    frame1 = Frame(tpl1)
+    frame1.pack(pady=30)
+    frame2 = Frame(frame1)
+    frame2.grid(row=0, column=0)
+    frame3 = Frame(frame1)
+    frame3.grid(row=0, column=1)
+    canvas = Canvas(frame2, width=300, height=430, bg='white')
+    canvas.pack()
+    meheszkep = Image.open(path+'/imgs/amehesz.png')
+    resized_mehesz = meheszkep.resize((300, 430))
+    global keszmehesz  
+    keszmehesz = ImageTk.PhotoImage(resized_mehesz)
+    canvas.create_image(0, 0, anchor='nw', image=keszmehesz)
+    meheszcim = Label(frame3, text='A méhész', font=('Helvetica', 24))
+    meheszcim.grid(row=0,column=0)
+
+
+
+
 
 root = Window(themename='solar')
 root.title('MoziTown')
 root.geometry('1000x600')
 root.resizable(False, False)
-root.iconbitmap('J:\Python\mozijegy\imgs\cinema.ico')
+root.iconbitmap(path+'/imgs/cinema.ico')
 
 
-logoimg = Image.open('J:\Python\mozijegy\imgs\MoziTown.png')
+logoimg = Image.open(path+'/imgs/MoziTown.png')
 resized_logo = logoimg.resize((500,500))
 displaylogo = ImageTk.PhotoImage(resized_logo)
 logo = Label(root, image=displaylogo)

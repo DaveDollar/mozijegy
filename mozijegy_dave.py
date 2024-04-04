@@ -19,7 +19,7 @@ def filmek():
     tpl1.geometry("1000x600")
     tpl1.resizable(False, False)
     tpl1.iconbitmap(path+'/imgs/cinema.ico')
-    cim = Label(tpl1, text='Filmek:', font=('Helvetica', 25))
+    cim = Label(tpl1, text='Filmek:', font=('Helvetica', 25), bootstyle="success")
     cim.pack(pady=10)
     style = Style()
     style.configure("Outline.TMenubutton", font=("Helvetica", 18))
@@ -36,23 +36,26 @@ def filmek():
 
 
 def on_menu_select():
-    frame1 = Frame(tpl1)
-    frame1.pack(pady=30)
-    frame2 = Frame(frame1)
-    frame2.grid(row=0, column=0)
-    frame3 = Frame(frame1)
-    frame3.grid(row=0, column=1)
-    canvas = Canvas(frame2, width=300, height=430, bg='white')
-    canvas.pack()
-    meheszkep = Image.open(path+'/imgs/amehesz.png')
-    resized_mehesz = meheszkep.resize((300, 430))
-    global keszmehesz  
-    keszmehesz = ImageTk.PhotoImage(resized_mehesz)
-    canvas.create_image(0, 0, anchor='nw', image=keszmehesz)
-    meheszcim = Label(frame3, text='A méhész', font=('Helvetica', 24))
-    meheszcim.grid(row=0,column=0)
-
-
+    try:
+        frame1.winfo_exists()
+    except NameError:
+        frame1 = Frame(tpl1)
+        frame1.pack()
+        frame2 = Frame(frame1)
+        frame2.grid(row=0, column=0, pady=10)
+        frame3 = Frame(frame1)
+        frame3.grid(row=0, column=1)
+        canvas = Canvas(frame2, width=300, height=430, bg='white')
+        canvas.pack()
+        meheszkep = Image.open(path+'/imgs/amehesz.png')
+        resized_mehesz = meheszkep.resize((300, 430))
+        global keszmehesz  
+        keszmehesz = ImageTk.PhotoImage(resized_mehesz)
+        canvas.create_image(0, 0, anchor='nw', image=keszmehesz)
+        meheszcim = Label(frame3, text='A méhész', font=('Helvetica', 24), bootstyle="success")
+        meheszszoveg = Label(frame3, text="A méhész 2024-es amerikai akcióthriller, melyet Kurt Wimmer\nforgatókönyvéből David Ayer rendezett. A főbb szerepekben\nJason Statham, Emmy Raver-Lampman, Josh Hutcherson,  \nBobby Naderi, Minnie Driver, Phylicia Rashad és Jeremy Irons\nlátható. 2024. január 12-én mutatta be az Amazon MGM Studios.", font=('Helvetica', 18), justify="center", bootstyle="success")
+        meheszcim.grid(row=1,column=1)
+        meheszszoveg.grid(row=2,column=0)
 
 
 

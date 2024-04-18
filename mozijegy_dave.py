@@ -44,7 +44,7 @@ def filmek():
     tpl1.mainloop()
 
 def filmgen(kpath, kcim, ktext):
-    global frame1, frame2, frame3
+    global frame1, frame2, frame3, s
     s = Style()
     s.configure('My.TFrame', background='#00495c')
     frame1 = Frame(tpl1, style='My.TFrame')
@@ -65,7 +65,7 @@ def filmgen(kpath, kcim, ktext):
     szoveg.pack(padx=(0,10))
     style = Style()
     style.configure("TButton", font=("Helvetica", 20))
-    btn = Button(frame3, text="Foglalás", style="TButton")
+    btn = Button(frame3, text="Foglalás", style="TButton", command=foglalas)
     btn.pack(pady=(30,0))
 
 
@@ -98,8 +98,185 @@ def on_menu_select(choice):
         elif choice == 4:
             filmgen('/imgs/imut.jpg','Imádlak utálni','\nAz Imádlak utálni 2023-as amerikai romantikus filmvígjáték, amelyet\nIlana Wolpert és Will Gluck forgatókönyvéből Gluck rendezett, William\nShakespeare Sok hűhó semmiért című műve alapján. A főbb szerepek-\nben Sydney Sweeney, Glen Powell, Alexandra Shipp, GaTa, Hadley\nRobinson, Michelle Hurd, Dermot Mulroney, Darren Barnet, Bryan\nBrown és Rachel Griffiths látható.')
 
+def foglalas():
+    tpl2 = Toplevel()
+    tpl2.geometry('600x600')
+    tpl2.title('Foglalás')
+    tpl2.resizable(False, False)
+    fogcim = Label(tpl2, text='Foglalás', font=('Helvetica', 35, 'bold'), bootstyle="success")
+    fogcim.pack(pady=(10,20))
+    style1 = Style()
+    style1.configure("success.TButton", font=("Helvetica", 15, 'bold'))
+    frame4 = Frame(tpl2, style='My.TFrame')
+    frame4.pack()
+    frame5 = Frame(tpl2, style='My.TFrame')
+    frame5.pack()
 
+    label1 = Label(frame4, text='1.', font=("Helvetica", 20, 'bold'), foreground='white', background='#00495c')
+    label1.grid(row=0,column=0, padx=(10,0))
 
+    seat11 = Button(frame4, text='1', style='success.TButton')
+    seat11.grid(row=0, column=1, padx=(10,5), pady=10)
+
+    seat21 = Button(frame4, text='2', style='success.TButton')
+    seat21.grid(row=0, column=2, padx=5, pady=10)
+
+    seat31 = Button(frame4, text='3', style='success.TButton')
+    seat31.grid(row=0, column=3, padx=5, pady=10)
+
+    seat41 = Button(frame4, text='4', style='success.TButton')
+    seat41.grid(row=0, column=4, padx=(5,25), pady=10)
+
+    seat51 = Button(frame4, text='5', style='success.TButton')
+    seat51.grid(row=0, column=5, padx=(25,5), pady=10)
+
+    seat61 = Button(frame4, text='6', style='success.TButton')
+    seat61.grid(row=0, column=6, padx=5, pady=10)
+
+    seat71 = Button(frame4, text='7', style='success.TButton')
+    seat71.grid(row=0, column=7, padx=5, pady=10)
+
+    seat81 = Button(frame4, text='8', style='success.TButton')
+    seat81.grid(row=0, column=8, padx=5, pady=10)
+
+    seat91 = Button(frame4, text='9', style='success.TButton')
+    seat91.grid(row=0, column=9, padx=(5,10), pady=10)
+
+    label2 = Label(frame4, text='2.', font=("Helvetica", 20, 'bold'), foreground='white', background='#00495c')
+    label2.grid(row=1,column=0, padx=(10,0))
+
+    seat12 = Button(frame4, text='1', style='success.TButton')
+    seat12.grid(row=1, column=1, padx=(10,5))
+
+    seat22 = Button(frame4, text='2', style='success.TButton')
+    seat22.grid(row=1, column=2, padx=5)
+
+    seat32 = Button(frame4, text='3', style='success.TButton')
+    seat32.grid(row=1, column=3, padx=5)
+
+    seat42 = Button(frame4, text='4', style='success.TButton')
+    seat42.grid(row=1, column=4, padx=(5,25))
+
+    seat52 = Button(frame4, text='5', style='success.TButton')
+    seat52.grid(row=1, column=5, padx=(25,5))
+
+    seat62 = Button(frame4, text='6', style='success.TButton')
+    seat62.grid(row=1, column=6, padx=5)
+
+    seat72 = Button(frame4, text='7', style='success.TButton')
+    seat72.grid(row=1, column=7, padx=5)
+
+    seat82 = Button(frame4, text='8', style='success.TButton')
+    seat82.grid(row=1, column=8, padx=5)
+
+    seat92 = Button(frame4, text='9', style='success.TButton')
+    seat92.grid(row=1, column=9, padx=(5,10))
+
+    label3 = Label(frame4, text='3.', font=("Helvetica", 20, 'bold'), foreground='white', background='#00495c')
+    label3.grid(row=2,column=0, padx=(10,0))
+
+    seat13 = Button(frame4, text='1', style='success.TButton')
+    seat13.grid(row=2, column=1, padx=(10,5), pady=10)
+
+    seat23 = Button(frame4, text='2', style='success.TButton')
+    seat23.grid(row=2, column=2, padx=5, pady=10)
+
+    seat33 = Button(frame4, text='3', style='success.TButton')
+    seat33.grid(row=2, column=3, padx=5, pady=10)
+
+    seat43 = Button(frame4, text='4', style='success.TButton')
+    seat43.grid(row=2, column=4, padx=(5,25), pady=10)
+
+    seat53 = Button(frame4, text='5', style='success.TButton')
+    seat53.grid(row=2, column=5, padx=(25,5), pady=10)
+
+    seat63 = Button(frame4, text='6', style='success.TButton')
+    seat63.grid(row=2, column=6, padx=5, pady=10)
+
+    seat73 = Button(frame4, text='7', style='success.TButton')
+    seat73.grid(row=2, column=7, padx=5, pady=10)
+
+    seat83 = Button(frame4, text='8', style='success.TButton')
+    seat83.grid(row=2, column=8, padx=5, pady=10)
+
+    seat93 = Button(frame4, text='9', style='success.TButton')
+    seat93.grid(row=2, column=9, padx=(5,10), pady=10)
+
+    label4 = Label(frame4, text='4.', font=("Helvetica", 20, 'bold'), foreground='white', background='#00495c')
+    label4.grid(row=3,column=0, padx=(10,0))
+
+    seat14 = Button(frame4, text='1', style='success.TButton')
+    seat14.grid(row=3, column=1, padx=(10,5))
+
+    seat24 = Button(frame4, text='2', style='success.TButton')
+    seat24.grid(row=3, column=2, padx=5)
+
+    seat34 = Button(frame4, text='3', style='success.TButton')
+    seat34.grid(row=3, column=3, padx=5)
+
+    seat44 = Button(frame4, text='4', style='success.TButton')
+    seat44.grid(row=3, column=4, padx=(5,25))
+
+    seat54 = Button(frame4, text='5', style='success.TButton')
+    seat54.grid(row=3, column=5, padx=(25,5))
+
+    seat64 = Button(frame4, text='6', style='success.TButton')
+    seat64.grid(row=3, column=6, padx=5)
+
+    seat74 = Button(frame4, text='7', style='success.TButton')
+    seat74.grid(row=3, column=7, padx=5)
+
+    seat84 = Button(frame4, text='8', style='success.TButton')
+    seat84.grid(row=3, column=8, padx=5)
+
+    seat94 = Button(frame4, text='9', style='success.TButton')
+    seat94.grid(row=3, column=9, padx=(5,10))
+
+    label5 = Label(frame5, text='5.', font=("Helvetica", 20, 'bold'), foreground='white', background='#00495c')
+    label5.grid(row=0,column=0, padx=(10,0))
+
+    seat15 = Button(frame5, text='1', style='success.TButton')
+    seat15.grid(row=0, column=1, padx=(10,5), pady=10)
+
+    seat25 = Button(frame5, text='2', style='success.TButton')
+    seat25.grid(row=0, column=2, padx=5, pady=10)
+
+    seat35 = Button(frame5, text='3', style='success.TButton')
+    seat35.grid(row=0, column=3, padx=5, pady=10)
+
+    seat45 = Button(frame5, text='4', style='success.TButton')
+    seat45.grid(row=0, column=4, padx=4, pady=10)
+
+    seatblock = Button(frame5, text='+', style='success.TButton')
+    seatblock.grid(row=0, column=5, padx=4, pady=10)
+
+    seat55 = Button(frame5, text='5', style='success.TButton')
+    seat55.grid(row=0, column=6, padx=4, pady=10)
+
+    seat65 = Button(frame5, text='6', style='success.TButton')
+    seat65.grid(row=0, column=7, padx=5, pady=10)
+
+    seat75 = Button(frame5, text='7', style='success.TButton')
+    seat75.grid(row=0, column=8, padx=5, pady=10)
+
+    seat85 = Button(frame5, text='8', style='success.TButton')
+    seat85.grid(row=0, column=9, padx=5, pady=10)
+
+    seat95 = Button(frame5, text='9', style='success.TButton')
+    seat95.grid(row=0, column=10, padx=(5,10), pady=10)
+    
+    mk = ttk.Menubutton(tpl2, text="Válassz termet!", style='Outline.TMenubutton', direction='below')
+    mk.pack(pady=20)
+    menu1 = Menu(mk, tearoff=False)
+    menu1.add_command(label='1-es terem', command=lambda: on_menu_select(0))
+    menu1.add_command(label='2-es terem', command=lambda: on_menu_select(1))
+    menu1.add_command(label='3-as terem', command=lambda: on_menu_select(2))
+    mk.config(menu=menu1)
+
+    foglal = Button(tpl2, text='Foglal', style='success.TButton')
+    foglal.pack()
+
+    tpl2.mainloop()
 
 root = Window(themename='solar')
 root.title('MoziTown')
@@ -109,7 +286,7 @@ root.iconbitmap(path+'/imgs/cinema.ico')
 
 
 logoimg = Image.open(path+'/imgs/MoziTown.png')
-resized_logo = logoimg.resize((500,500))
+resized_logo = logoimg.resize((500,500)) 
 displaylogo = ImageTk.PhotoImage(resized_logo)
 logo = Label(root, image=displaylogo)
 logo.pack()

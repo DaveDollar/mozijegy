@@ -1,4 +1,5 @@
 from tkinter import *
+from tkcalendar import Calendar, DateEntry
 from tkinter import messagebox
 from tkinter import ttk, Canvas
 from ttkbootstrap import *
@@ -6,6 +7,11 @@ from ttkbootstrap import Style, Window
 from PIL import Image, ImageTk
 import os
 import time
+
+global count11,count21,count31,count41,count51,count61,count71,count81,count91,count12,count22,count32,count42,count52,count62,count72,count82,count92,count13,count23,count33,count43,count53,count63,count73,count83,count93,count14,count24,count34,count44,count54,count64,count74,count84,count94,count15,count25,count35,count45,count55,count65,count75,count85,count95,countblock
+
+idopontok = ['11:30', '13:30', '16:30', '17:00', '17:30', '18:00', '19:30', '20:30', '22:30']
+count11,count21,count31,count41,count51,count61,count71,count81,count91,count12,count22,count32,count42,count52,count62,count72,count82,count92,count13,count23,count33,count43,count53,count63,count73,count83,count93,count14,count24,count34,count44,count54,count64,count74,count84,count94,count15,count25,count35,count45,count55,count65,count75,count85,count95,countblock = 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 
 def getpath():
     path = os.path.abspath(os.getcwd())
@@ -44,7 +50,7 @@ def filmek():
     tpl1.mainloop()
 
 def filmgen(kpath, kcim, ktext):
-    global frame1, frame2, frame3, s
+    global frame1, frame2, frame3
     s = Style()
     s.configure('My.TFrame', background='#00495c')
     frame1 = Frame(tpl1, style='My.TFrame')
@@ -99,14 +105,24 @@ def on_menu_select(choice):
             filmgen('/imgs/imut.jpg','Imádlak utálni','\nAz Imádlak utálni 2023-as amerikai romantikus filmvígjáték, amelyet\nIlana Wolpert és Will Gluck forgatókönyvéből Gluck rendezett, William\nShakespeare Sok hűhó semmiért című műve alapján. A főbb szerepek-\nben Sydney Sweeney, Glen Powell, Alexandra Shipp, GaTa, Hadley\nRobinson, Michelle Hurd, Dermot Mulroney, Darren Barnet, Bryan\nBrown és Rachel Griffiths látható.')
 
 def foglalas():
+    global tpl2, mk, seat11, seat21, seat31
     tpl2 = Toplevel()
     tpl2.geometry('600x600')
     tpl2.title('Foglalás')
     tpl2.resizable(False, False)
+    tpl2.iconbitmap(path+'/imgs/cinema.ico')
     fogcim = Label(tpl2, text='Foglalás', font=('Helvetica', 35, 'bold'), bootstyle="success")
     fogcim.pack(pady=(10,20))
     style1 = Style()
     style1.configure("success.TButton", font=("Helvetica", 15, 'bold'))
+    style2 = Style()
+    style2.configure("TButton", font=("Helvetica", 13, 'bold'))
+    styl3 = Style()
+    styl3.configure("TMenubutton", font=("Helvetica", 11))
+    style4 = Style()
+    style4.configure("warning.TButton", font=("Helvetica", 15, 'bold'))
+    style5 = Style()
+    style5.configure("info.TButton", font=("Helvetica", 15, 'bold'))
     frame4 = Frame(tpl2, style='My.TFrame')
     frame4.pack()
     frame5 = Frame(tpl2, style='My.TFrame')
@@ -115,13 +131,13 @@ def foglalas():
     label1 = Label(frame4, text='1.', font=("Helvetica", 20, 'bold'), foreground='white', background='#00495c')
     label1.grid(row=0,column=0, padx=(10,0))
 
-    seat11 = Button(frame4, text='1', style='success.TButton')
+    seat11 = Button(frame4, text='1', style='success.TButton', command=lambda: btnclick(11))
     seat11.grid(row=0, column=1, padx=(10,5), pady=10)
 
-    seat21 = Button(frame4, text='2', style='success.TButton')
+    seat21 = Button(frame4, text='2', style='success.TButton', command=lambda: btnclick(21))
     seat21.grid(row=0, column=2, padx=5, pady=10)
 
-    seat31 = Button(frame4, text='3', style='success.TButton')
+    seat31 = Button(frame4, text='3', style='success.TButton', command=lambda: btnclick(31))
     seat31.grid(row=0, column=3, padx=5, pady=10)
 
     seat41 = Button(frame4, text='4', style='success.TButton')
@@ -264,26 +280,65 @@ def foglalas():
 
     seat95 = Button(frame5, text='9', style='success.TButton')
     seat95.grid(row=0, column=10, padx=(5,10), pady=10)
-    
-    mk = ttk.Menubutton(tpl2, text="Válassz termet!", style='Outline.TMenubutton', direction='below')
-    mk.pack(pady=20)
+
+    idolabel = Label(tpl2, text='Válassz időpontot!', font=('Helvetica', 20, 'bold'), bootstyle="success")
+    idolabel.pack(pady=10)
+
+    frame6 = Frame(tpl2, style='My.TFrame')
+    frame6.pack()
+
+    cal = DateEntry(frame6, width=16)
+    cal.grid(row=0, column=0, padx=(10,5), pady=10)
+
+    mk = ttk.Menubutton(frame6, text="Óra", style='TMenubutton', direction='below')
+    mk.grid(row=0, column=1, padx=(5,10))
     menu1 = Menu(mk, tearoff=False)
-    menu1.add_command(label='1-es terem', command=lambda: on_menu_select(0))
-    menu1.add_command(label='2-es terem', command=lambda: on_menu_select(1))
-    menu1.add_command(label='3-as terem', command=lambda: on_menu_select(2))
+    menu1.add_command(label=idopontok[0], command=lambda: idosdef(0))
+    menu1.add_command(label=idopontok[1], command=lambda: idosdef(1))
+    menu1.add_command(label=idopontok[2], command=lambda: idosdef(2))
+    menu1.add_command(label=idopontok[3], command=lambda: idosdef(3))
+    menu1.add_command(label=idopontok[4], command=lambda: idosdef(4))
+    menu1.add_command(label=idopontok[5], command=lambda: idosdef(5))
+    menu1.add_command(label=idopontok[6], command=lambda: idosdef(6))
+    menu1.add_command(label=idopontok[7], command=lambda: idosdef(7))
+    menu1.add_command(label=idopontok[8], command=lambda: idosdef(8))
     mk.config(menu=menu1)
 
     foglal = Button(tpl2, text='Foglal', style='success.TButton')
-    foglal.pack()
+    foglal.pack(pady=(20,0))
 
     tpl2.mainloop()
+
+def idosdef(n):
+    mk.config(text=idopontok[n])
+
+def btnclick(z):
+    global count11,count21,count31,count41,count51,count61,count71,count81,count91,count12,count22,count32,count42,count52,count62,count72,count82,count92,count13,count23,count33,count43,count53,count63,count73,count83,count93,count14,count24,count34,count44,count54,count64,count74,count84,count94,count15,count25,count35,count45,count55,count65,count75,count85,count95, countblock
+    if z == 11:
+        if count11%2==0 or count11==0:
+            seat11.config(style='info.TButton')
+        else:
+            seat11.config(style='success.TButton')
+        count11+=1
+    elif z == 21:
+        if count21%2==0 or count21==0:
+            seat21.config(style='info.TButton')
+        else:
+            seat21.config(style='success.TButton')
+        count21+=1
+    elif z == 31:
+        if count31%2==0 or count31==0:
+            seat31.config(style='info.TButton')
+        else:
+            seat31.config(style='success.TButton')
+        count31+=1
+
 
 root = Window(themename='solar')
 root.title('MoziTown')
 root.geometry('600x600')
 root.resizable(False, False)
 root.iconbitmap(path+'/imgs/cinema.ico')
-
 
 logoimg = Image.open(path+'/imgs/MoziTown.png')
 resized_logo = logoimg.resize((500,500)) 

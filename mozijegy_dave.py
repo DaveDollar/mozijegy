@@ -7,6 +7,7 @@ from ttkbootstrap import Style, Window
 from PIL import Image, ImageTk
 import os
 import time
+from fpdf import FPDF
 
 global count11,count21,count31,count41,count51,count61,count71,count81,count91,count12,count22,count32,count42,count52,count62,count72,count82,count92,count13,count23,count33,count43,count53,count63,count73,count83,count93,count14,count24,count34,count44,count54,count64,count74,count84,count94,count15,count25,count35,count45,count55,count65,count75,count85,count95,countblock
 
@@ -304,7 +305,7 @@ def foglalas():
     menu1.add_command(label=idopontok[8], command=lambda: idosdef(8))
     mk.config(menu=menu1)
 
-    foglal = Button(tpl2, text='Foglal', style='success.TButton')
+    foglal = Button(tpl2, text='Foglal', style='success.TButton', command=pdfjegy)
     foglal.pack(pady=(20,0))
 
     tpl2.mainloop()
@@ -591,6 +592,22 @@ def btnclick(z):
             seat95.config(style='success.TButton')
         count95+=1
 
+def pdfjegy():
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font('arial', size=35,style='U') 
+    pdf.image('imgs/MoziTownFeher.png', x=10, y=10, w=50)
+    pdf.image('imgs/amehesz.png', x=110, y=50, w=80)
+    pdf.cell(200, 40, txt="Mozijegy", ln=True, align='C')
+    pdf.set_font('arial', size=25, style='U') 
+    pdf.cell(30, 40, txt='Film: A méhész', ln=True, align='L')
+    pdf.set_font('arial', size=20)
+    pdf.cell(40, 8, txt='Ülöhelyek száma: 1', ln=True, align='L')
+    pdf.cell(40, 8, txt='Terem száma: 1', ln=True, align='L')
+    pdf.cell(40, 8, txt='Vetítés ideje: 16:00', ln=True, align='L')
+    pdf.cell(40, 8, txt='Jegy ára: 2000 Ft', ln=True, align='L')
+    pdf.image('imgs/qrcode.png', x=70, y=180, w=70)
+    pdf.output("mozijegy.pdf")
 
 root = Window(themename='solar')
 root.title('MoziTown')

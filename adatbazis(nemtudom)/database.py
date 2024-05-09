@@ -1,6 +1,6 @@
 import sqlite3
 
-connection = sqlite3.connect('database1.py')
+connection = sqlite3.connect('database1.db')
 cursor = connection.cursor()
 
 def create_database():
@@ -10,13 +10,14 @@ def create_database():
     except Exception:
         foglalasok = """CREATE TABLE Foglalasok (
         Sorszam INT AUTO_INCREMENT PRIMARY KEY,
+        Film CHAR NOT NULL,
         Szekszam INT NOT NULL,
         Nap DATE NOT NULL,
         Ora TIME NOT NULL);"""
         cursor.execute(foglalasok)
 
-def add_foglalas(Szekszam, Nap, Ora):
-    command = f"""INSERT INTO termek VALUES ('{Szekszam}','{Nap}','{Ora})"""
+def add_foglalas(Film, Szekszam, Nap, Ora):
+    command = f"""INSERT INTO termek VALUES ('{Film}','{Szekszam}','{Nap}','{Ora})"""
     cursor.execute(command)
     connection.commit()
 

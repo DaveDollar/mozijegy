@@ -8,11 +8,20 @@ from PIL import Image, ImageTk
 import os
 import time
 from fpdf import FPDF
+import random as r
 
-global count11,count21,count31,count41,count51,count61,count71,count81,count91,count12,count22,count32,count42,count52,count62,count72,count82,count92,count13,count23,count33,count43,count53,count63,count73,count83,count93,count14,count24,count34,count44,count54,count64,count74,count84,count94,count15,count25,count35,count45,count55,count65,count75,count85,count95,countblock
+global count11,count21,count31,count41,count51,count61,count71,count81,count91,count12,count22,count32,count42,count52,count62,count72,count82,count92,count13,count23,count33,count43,count53,count63,count73,count83,count93,count14,count24,count34,count44,count54,count64,count74,count84,count94,count15,count25,count35,count45,count55,count65,count75,count85,count95,countblock, szamolo, ulohelyek, idopont
+
+global isblue11,isblue21,isblue31,isblue41,isblue51,isblue61,isblue71,isblue81,isblue91,isblue12,isblue22,isblue32,isblue42,isblue52,isblue62,isblue72,isblue82,isblue92,isblue13,isblue23,isblue33,isblue43,isblue53,isblue63,isblue73,isblue83,isblue93,isblue14,isblue24,isblue34,isblue44,isblue54,isblue64,isblue74,isblue84,isblue94,isblue15,isblue25,isblue35,isblue45,isblue55,isblue65,isblue75,isblue85,isblue95,isblueblock
+
+szamolo = 0
+ulohelyek = 0
+idopont = '00:00'
 
 idopontok = ['11:30', '13:30', '16:30', '17:00', '17:30', '18:00', '19:30', '20:30', '22:30']
 count11,count21,count31,count41,count51,count61,count71,count81,count91,count12,count22,count32,count42,count52,count62,count72,count82,count92,count13,count23,count33,count43,count53,count63,count73,count83,count93,count14,count24,count34,count44,count54,count64,count74,count84,count94,count15,count25,count35,count45,count55,count65,count75,count85,count95,countblock = 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+
+isblue11,isblue21,isblue31,isblue41,isblue51,isblue61,isblue71,isblue81,isblue91,isblue12,isblue22,isblue32,isblue42,isblue52,isblue62,isblue72,isblue82,isblue92,isblue13,isblue23,isblue33,isblue43,isblue53,isblue63,isblue73,isblue83,isblue93,isblue14,isblue24,isblue34,isblue44,isblue54,isblue64,isblue74,isblue84,isblue94,isblue15,isblue25,isblue35,isblue45,isblue55,isblue65,isblue75,isblue85,isblue95,isblueblock = False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False
 
 def getpath():
     path = os.path.abspath(os.getcwd())
@@ -77,7 +86,7 @@ def filmgen(kpath, kcim, ktext):
 
 
 def on_menu_select(choice):
-    global frame1, frame2, frame3
+    global frame1, frame2, frame3, szamolo
     try:
         if frame1.winfo_exists():
             frame1.destroy()
@@ -85,28 +94,38 @@ def on_menu_select(choice):
             frame3.destroy()
             if choice == 0:
                 filmgen('/imgs/amehesz.png','A méhész','\nA méhész 2024-es amerikai akcióthriller, melyet Kurt Wimmer\nforgatókönyvéből David Ayer rendezett. A főbb szerepekben\nJason Statham, Emmy Raver-Lampman, JoshHutcherson,  \nBobby Naderi, Minnie Driver, Phylicia Rashad és Jeremy Irons\nlátható. 2024. január 12-én mutatta be az Amazon MGM Studios.')
+                szamolo=0
             elif choice == 1:
                 filmgen('/imgs/demonslayer.jpg', 'Demon Slayer: To the Hashira Training', '\nEgy titkos szervezet vigyáz ránk. Ha a Kimetsu no Yaiba, a Demon\nSlayer nem létezne, a földet már démonok uralnák: ők viszont évszá-\nzadok óta küzdenek az egykori emberi lények ellen, akik haláluk után\nrendkívüli képességekre tettek szert: erősek, gyorsan gyógyulnak és\nszinte halhatatlanok.')
+                szamolo=1
             elif choice == 2:
                 filmgen('/imgs/dune2.jpg', 'Dűne: Második rész', '\nA távoli jövőben, a bolygóközi királyságok korában játszódó törté-\nnetben két nagyhatalmú uralkodóház harcol az Arrakis bolygó feletti\nhatalomért, mert az ismert univerzumban egyedül az itteni végtelen\nsivatagban bányászható az a fűszer, amely lehetővé teszi a csillag-\nközi utazást. A Harkonnenek ura kiirtatta az Atreides családot.')
+                szamolo=2
             elif choice == 3:
                 filmgen('/imgs/mw.jpg','Madame Web', '\nA Madame Web 2024-ben bemutatott amerikai szuperhősfilm\nS. J. Clarkson rendezésében. Gyártója a Columbia Pictures,\nMarvel Entertainment és Di Bonaventura Pictures, forgalmazója\na Sony Pictures Releasing. Ez a film a Sony Pókember univerzu-\nmának negyedik filmje.')
+                szamolo=3
             elif choice == 4:
                 filmgen('/imgs/imut.jpg','Imádlak utálni','\nAz Imádlak utálni 2023-as amerikai romantikus filmvígjáték, amelyet\nIlana Wolpert és Will Gluck forgatókönyvéből Gluck rendezett, William\nShakespeare Sok hűhó semmiért című műve alapján. A főbb szerepek-\nben Sydney Sweeney, Glen Powell, Alexandra Shipp, GaTa, Hadley\nRobinson, Michelle Hurd, Dermot Mulroney, Darren Barnet, Bryan\nBrown és Rachel Griffiths látható.')
+                szamolo=4
     except Exception:
         if choice == 0:
                 filmgen('/imgs/amehesz.png','A méhész','\nA méhész 2024-es amerikai akcióthriller, melyet Kurt Wimmer\nforgatókönyvéből David Ayer rendezett. A főbb szerepekben\nJason Statham, Emmy Raver-Lampman, JoshHutcherson,  \nBobby Naderi, Minnie Driver, Phylicia Rashad és Jeremy Irons\nlátható. 2024. január 12-én mutatta be az Amazon MGM Studios.')
+                szamolo=0
         elif choice == 1:
             filmgen('/imgs/demonslayer.jpg', 'Demon Slayer: To the Hashira Training', '\nEgy titkos szervezet vigyáz ránk. Ha a Kimetsu no Yaiba, a Demon\nSlayer nem létezne, a földet már démonok uralnák: ők viszont évszá-\nzadok óta küzdenek az egykori emberi lények ellen, akik haláluk után\nrendkívüli képességekre tettek szert: erősek, gyorsan gyógyulnak és\nszinte halhatatlanok.')
+            szamolo=1
         elif choice == 2:
             filmgen('/imgs/dune2.jpg', 'Dűne: Második rész', '\nA távoli jövőben, a bolygóközi királyságok korában játszódó törté-\nnetben két nagyhatalmú uralkodóház harcol az Arrakis bolygó feletti\nhatalomért, mert az ismert univerzumban egyedül az itteni végtelen\nsivatagban bányászható az a fűszer, amely lehetővé teszi a csillag-\nközi utazást. A Harkonnenek ura kiirtatta az Atreides családot.')
+            szamolo=2
         elif choice == 3:
             filmgen('/imgs/mw.jpg','Madame Web', '\nA Madame Web 2024-ben bemutatott amerikai szuperhősfilm\nS. J. Clarkson rendezésében. Gyártója a Columbia Pictures,\nMarvel Entertainment és Di Bonaventura Pictures, forgalmazója\na Sony Pictures Releasing. Ez a film a Sony Pókember univerzu-\nmának negyedik filmje.')
+            szamolo=3
         elif choice == 4:
             filmgen('/imgs/imut.jpg','Imádlak utálni','\nAz Imádlak utálni 2023-as amerikai romantikus filmvígjáték, amelyet\nIlana Wolpert és Will Gluck forgatókönyvéből Gluck rendezett, William\nShakespeare Sok hűhó semmiért című műve alapján. A főbb szerepek-\nben Sydney Sweeney, Glen Powell, Alexandra Shipp, GaTa, Hadley\nRobinson, Michelle Hurd, Dermot Mulroney, Darren Barnet, Bryan\nBrown és Rachel Griffiths látható.')
+            szamolo=4
 
 def foglalas():
-    global tpl2,mk,seat11,seat21,seat31,seat41,seat51,seat61,seat71,seat81,seat91,seat12,seat22,seat32,seat42,seat52,seat62,seat72,seat82,seat92,seat13,seat23,seat33,seat43,seat53,seat63,seat73,seat83,seat93,seat14,seat24,seat34,seat44,seat54,seat64,seat74,seat84,seat94,seat15,seat25,seat35,seat45,seat55,seat65,seat75,seat85,seat95,seatblock
+    global tpl2,mk,seat11,seat21,seat31,seat41,seat51,seat61,seat71,seat81,seat91,seat12,seat22,seat32,seat42,seat52,seat62,seat72,seat82,seat92,seat13,seat23,seat33,seat43,seat53,seat63,seat73,seat83,seat93,seat14,seat24,seat34,seat44,seat54,seat64,seat74,seat84,seat94,seat15,seat25,seat35,seat45,seat55,seat65,seat75,seat85,seat95,seatblock, cal
     tpl2 = Toplevel()
     tpl2.geometry('600x600')
     tpl2.title('Foglalás')
@@ -311,303 +330,469 @@ def foglalas():
     tpl2.mainloop()
 
 def idosdef(n):
+    global idopont
     mk.config(text=idopontok[n])
+    idopont = idopontok[n]
 
 def btnclick(z):
-    global count11,count21,count31,count41,count51,count61,count71,count81,count91,count12,count22,count32,count42,count52,count62,count72,count82,count92,count13,count23,count33,count43,count53,count63,count73,count83,count93,count14,count24,count34,count44,count54,count64,count74,count84,count94,count15,count25,count35,count45,count55,count65,count75,count85,count95, countblock
+    global count11,count21,count31,count41,count51,count61,count71,count81,count91,count12,count22,count32,count42,count52,count62,count72,count82,count92,count13,count23,count33,count43,count53,count63,count73,count83,count93,count14,count24,count34,count44,count54,count64,count74,count84,count94,count15,count25,count35,count45,count55,count65,count75,count85,count95,countblock,ulohelyek
     if z == 11:
         if count11%2==0 or count11==0:
             seat11.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat11.config(style='success.TButton')
+            ulohelyek-=1
         count11+=1
     elif z == 21:
         if count21%2==0 or count21==0:
             seat21.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat21.config(style='success.TButton')
+            ulohelyek-=1
         count21+=1
     elif z == 31:
         if count31%2==0 or count31==0:
             seat31.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat31.config(style='success.TButton')
+            ulohelyek-=1
         count31+=1
     elif z == 41:
         if count41%2==0 or count41==0:
             seat41.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat41.config(style='success.TButton')
+            ulohelyek-=1
         count41+=1
     elif z == 51:
         if count51%2==0 or count51==0:
             seat51.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat51.config(style='success.TButton')
+            ulohelyek-=1
         count51+=1
     elif z == 61:
         if count61%2==0 or count61==0:
             seat61.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat61.config(style='success.TButton')
+            ulohelyek-=1
         count61+=1
     elif z == 71:
         if count71%2==0 or count71==0:
             seat71.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat71.config(style='success.TButton')
+            ulohelyek-=1
         count71+=1
     elif z == 81:
         if count81%2==0 or count81==0:
             seat81.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat81.config(style='success.TButton')
+            ulohelyek-=1
         count81+=1
     elif z == 91:
         if count91%2==0 or count91==0:
             seat91.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat91.config(style='success.TButton')
+            ulohelyek-=1
         count91+=1
     elif z == 12:
         if count12%2==0 or count12==0:
             seat12.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat12.config(style='success.TButton')
+            ulohelyek-=1
         count12+=1
     elif z == 22:
         if count22%2==0 or count22==0:
             seat22.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat22.config(style='success.TButton')
+            ulohelyek-=1
         count22+=1
     elif z == 32:
         if count32%2==0 or count32==0:
             seat32.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat32.config(style='success.TButton')
+            ulohelyek-=1
         count32+=1
     elif z == 42:
         if count42%2==0 or count42==0:
             seat42.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat42.config(style='success.TButton')
+            ulohelyek-=1
         count42+=1
     elif z == 52:
         if count52%2==0 or count52==0:
             seat52.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat52.config(style='success.TButton')
+            ulohelyek-=1
         count52+=1
     elif z == 62:
         if count62%2==0 or count62==0:
             seat62.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat62.config(style='success.TButton')
+            ulohelyek-=1
         count62+=1
     elif z == 72:
         if count72%2==0 or count72==0:
             seat72.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat72.config(style='success.TButton')
+            ulohelyek-=1
         count72+=1
     elif z == 82:
         if count82%2==0 or count82==0:
             seat82.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat82.config(style='success.TButton')
+            ulohelyek-=1
         count82+=1
     elif z == 92:
         if count92%2==0 or count92==0:
             seat92.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat92.config(style='success.TButton')
+            ulohelyek-=1
         count92+=1
     elif z == 13:
         if count13%2==0 or count13==0:
             seat13.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat13.config(style='success.TButton')
+            ulohelyek-=1
         count13+=1
     elif z == 23:
         if count23%2==0 or count23==0:
             seat23.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat23.config(style='success.TButton')
+            ulohelyek-=1
         count23+=1
     elif z == 33:
         if count33%2==0 or count33==0:
             seat33.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat33.config(style='success.TButton')
+            ulohelyek-=1
         count33+=1
     elif z == 43:
         if count43%2==0 or count43==0:
             seat43.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat43.config(style='success.TButton')
+            ulohelyek-=1
         count43+=1
     elif z == 53:
         if count53%2==0 or count53==0:
             seat53.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat53.config(style='success.TButton')
+            ulohelyek-=1
         count53+=1
     elif z == 63:
         if count63%2==0 or count63==0:
             seat63.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat63.config(style='success.TButton')
+            ulohelyek-=1
         count63+=1
     elif z == 73:
         if count73%2==0 or count73==0:
             seat73.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat73.config(style='success.TButton')
+            ulohelyek-=1
         count73+=1
     elif z == 83:
         if count83%2==0 or count83==0:
             seat83.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat83.config(style='success.TButton')
+            ulohelyek-=1
         count83+=1
     elif z == 93:
         if count93%2==0 or count93==0:
             seat93.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat93.config(style='success.TButton')
+            ulohelyek-=1
         count93+=1
     elif z == 14:
         if count14%2==0 or count14==0:
             seat14.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat14.config(style='success.TButton')
+            ulohelyek-=1
         count14+=1
     elif z == 24:
         if count24%2==0 or count24==0:
             seat24.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat24.config(style='success.TButton')
+            ulohelyek-=1
         count24+=1
     elif z == 34:
         if count34%2==0 or count34==0:
             seat34.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat34.config(style='success.TButton')
+            ulohelyek-=1
         count34+=1
     elif z == 44:
         if count44%2==0 or count44==0:
             seat44.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat44.config(style='success.TButton')
+            ulohelyek-=1
         count44+=1
     elif z == 54:
         if count54%2==0 or count54==0:
             seat54.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat54.config(style='success.TButton')
+            ulohelyek-=1
         count54+=1
     elif z == 64:
         if count64%2==0 or count64==0:
             seat64.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat64.config(style='success.TButton')
+            ulohelyek-=1
         count64+=1
     elif z == 74:
         if count74%2==0 or count74==0:
             seat74.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat74.config(style='success.TButton')
+            ulohelyek-=1
         count74+=1
     elif z == 84:
         if count84%2==0 or count84==0:
             seat84.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat84.config(style='success.TButton')
+            ulohelyek-=1
         count84+=1
     elif z == 94:
         if count94%2==0 or count94==0:
             seat94.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat94.config(style='success.TButton')
+            ulohelyek-=1
         count94+=1
     elif z == 15:
         if count15%2==0 or count15==0:
             seat15.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat15.config(style='success.TButton')
+            ulohelyek-=1
         count15+=1
     elif z == 25:
         if count25%2==0 or count25==0:
             seat25.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat25.config(style='success.TButton')
+            ulohelyek-=1
         count25+=1
     elif z == 35:
         if count35%2==0 or count35==0:
             seat35.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat35.config(style='success.TButton')
+            ulohelyek-=1
         count35+=1
     elif z == 45:
         if count45%2==0 or count45==0:
             seat45.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat45.config(style='success.TButton')
+            ulohelyek-=1
         count45+=1
     elif z == 00:
         if countblock%2==0 or countblock==0:
             seatblock.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seatblock.config(style='success.TButton')
+            ulohelyek-=1
         countblock+=1
     elif z == 55:
         if count55%2==0 or count55==0:
             seat55.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat55.config(style='success.TButton')
+            ulohelyek-=1
         count55+=1
     elif z == 65:
         if count65%2==0 or count65==0:
             seat65.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat65.config(style='success.TButton')
+            ulohelyek-=1
         count65+=1
     elif z == 75:
         if count75%2==0 or count75==0:
             seat75.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat75.config(style='success.TButton')
+            ulohelyek-=1
         count75+=1
     elif z == 85:
         if count85%2==0 or count85==0:
             seat85.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat85.config(style='success.TButton')
+            ulohelyek-=1
         count85+=1
     elif z == 95:
         if count95%2==0 or count95==0:
             seat95.config(style='info.TButton')
+            ulohelyek+=1
         else:
             seat95.config(style='success.TButton')
+            ulohelyek-=1
         count95+=1
 
 def pdfjegy():
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font('arial', size=35,style='U') 
-    pdf.image('imgs/MoziTownFeher.png', x=10, y=10, w=50)
-    pdf.image('imgs/amehesz.png', x=110, y=50, w=80)
-    pdf.cell(200, 40, txt="Mozijegy", ln=True, align='C')
-    pdf.set_font('arial', size=25, style='U') 
-    pdf.cell(30, 40, txt='Film: A méhész', ln=True, align='L')
-    pdf.set_font('arial', size=20)
-    pdf.cell(40, 8, txt='Ülöhelyek száma: 1', ln=True, align='L')
-    pdf.cell(40, 8, txt='Terem száma: 1', ln=True, align='L')
-    pdf.cell(40, 8, txt='Vetítés ideje: 16:00', ln=True, align='L')
-    pdf.cell(40, 8, txt='Jegy ára: 2000 Ft', ln=True, align='L')
-    pdf.image('imgs/qrcode.png', x=70, y=180, w=70)
-    pdf.output("mozijegy.pdf")
+    global szamolo, idopont, ulohelyek, cal
+    if idopont != '00:00' and ulohelyek>0:
+        if szamolo==0:
+            pdf = FPDF()
+            pdf.add_page()
+            pdf.set_font('arial', size=35,style='U') 
+            pdf.image('imgs/MoziTownFeher.png', x=10, y=10, w=50)
+            pdf.image('imgs/amehesz.png', x=110, y=50, w=80)
+            pdf.cell(200, 40, txt="Mozijegy", ln=True, align='C')
+            pdf.set_font('arial', size=25, style='U') 
+            pdf.cell(30, 40, txt='Film: A méhész', ln=True, align='L')
+            pdf.set_font('arial', size=20)
+            pdf.cell(40, 8, txt=f'Ülöhelyek száma: {ulohelyek}', ln=True, align='L')
+            pdf.cell(40, 8, txt=f'Terem száma: {r.randint(1,4)}', ln=True, align='L')
+            pdf.cell(40, 8, txt=f'Vetítés ideje:  {idopont}', ln=True, align='L')
+            pdf.cell(40, 8, txt=f'Jegy ára: {ulohelyek*2000} Ft', ln=True, align='L')
+            pdf.image('imgs/qrcode.png', x=70, y=180, w=70)
+            pdf.output("mozijegy.pdf")
+        elif szamolo==1:
+            pdf = FPDF()
+            pdf.add_page()
+            pdf.set_font('arial', size=35,style='U') 
+            pdf.image('imgs/MoziTownFeher.png', x=10, y=10, w=50)
+            pdf.image('imgs/demonslayer.jpg', x=110, y=50, w=80)
+            pdf.cell(200, 40, txt="Mozijegy", ln=True, align='C')
+            pdf.set_font('arial', size=25, style='U') 
+            pdf.cell(30, 20, txt='', ln=True, align='L')
+            pdf.cell(30, 0, txt='Film: Demon Slayer -', ln=True, align='L')
+            pdf.cell(30, 20, txt='To The Hashira Training', ln=True, align='L')
+            pdf.set_font('arial', size=20)
+            pdf.cell(40, 8, txt=f'Ülöhelyek száma: {ulohelyek}', ln=True, align='L')
+            pdf.cell(40, 8, txt=f'Terem száma: {r.randint(1,4)}', ln=True, align='L')
+            pdf.cell(40, 8, txt=f'Vetítés ideje:  {idopont}', ln=True, align='L')
+            pdf.cell(40, 8, txt=f'Jegy ára: {ulohelyek*2000} Ft', ln=True, align='L')
+            pdf.image('imgs/qrcode.png', x=70, y=180, w=70)
+            pdf.output("mozijegy.pdf")
+        elif szamolo==2:
+            pdf = FPDF()
+            pdf.add_page()
+            pdf.set_font('arial', size=35,style='U') 
+            pdf.image('imgs/MoziTownFeher.png', x=10, y=10, w=50)
+            pdf.image('imgs/dune2.jpg', x=115, y=50, w=80)
+            pdf.cell(200, 40, txt="Mozijegy", ln=True, align='C')
+            pdf.set_font('arial', size=25, style='U') 
+            pdf.cell(30, 40, txt='Film: Düne: Második rész', ln=True, align='L')
+            pdf.set_font('arial', size=20)
+            pdf.cell(40, 8, txt=f'Ülöhelyek száma: {ulohelyek}', ln=True, align='L')
+            pdf.cell(40, 8, txt=f'Terem száma: {r.randint(1,4)}', ln=True, align='L')
+            pdf.cell(40, 8, txt=f'Vetítés ideje:  {idopont}', ln=True, align='L')
+            pdf.cell(40, 8, txt=f'Jegy ára: {ulohelyek*2000} Ft', ln=True, align='L')
+            pdf.image('imgs/qrcode.png', x=70, y=180, w=70)
+            pdf.output("mozijegy.pdf")
+        elif szamolo==3:
+            pdf = FPDF()
+            pdf.add_page()
+            pdf.set_font('arial', size=35,style='U') 
+            pdf.image('imgs/MoziTownFeher.png', x=10, y=10, w=50)
+            pdf.image('imgs/mw.jpg', x=110, y=50, w=80)
+            pdf.cell(200, 40, txt="Mozijegy", ln=True, align='C')
+            pdf.set_font('arial', size=25, style='U') 
+            pdf.cell(30, 40, txt='Film: Madame Web', ln=True, align='L')
+            pdf.set_font('arial', size=20)
+            pdf.cell(40, 8, txt=f'Ülöhelyek száma: {ulohelyek}', ln=True, align='L')
+            pdf.cell(40, 8, txt=f'Terem száma: {r.randint(1,4)}', ln=True, align='L')
+            pdf.cell(40, 8, txt=f'Vetítés ideje:  {idopont}', ln=True, align='L')
+            pdf.cell(40, 8, txt=f'Jegy ára: {ulohelyek*2000} Ft', ln=True, align='L')
+            pdf.image('imgs/qrcode.png', x=70, y=180, w=70)
+            pdf.output("mozijegy.pdf")
+        elif szamolo==4:
+            pdf = FPDF()
+            pdf.add_page()
+            pdf.set_font('arial', size=35,style='U') 
+            pdf.image('imgs/MoziTownFeher.png', x=10, y=10, w=50)
+            pdf.image('imgs/imut.jpg', x=110, y=50, w=80)
+            pdf.cell(200, 40, txt="Mozijegy", ln=True, align='C')
+            pdf.set_font('arial', size=25, style='U') 
+            pdf.cell(30, 40, txt='Film: Imádlak utálni', ln=True, align='L')
+            pdf.set_font('arial', size=20)
+            pdf.cell(40, 8, txt=f'Ülöhelyek száma: {ulohelyek}', ln=True, align='L')
+            pdf.cell(40, 8, txt=f'Terem száma: {r.randint(1,4)}', ln=True, align='L')
+            pdf.cell(40, 8, txt=f'Vetítés ideje:  {idopont}', ln=True, align='L')
+            pdf.cell(40, 8, txt=f'Jegy ára: {ulohelyek*2000} Ft', ln=True, align='L')
+            pdf.image('imgs/qrcode.png', x=70, y=180, w=70)
+            pdf.output("mozijegy.pdf")
+        messagebox.showinfo('Juhhúú', 'A jegyed el lett mentve pdfként!')
+    else:
+        messagebox.showerror('Naa','Nem választottál ki időpontot vagy ülőhelyet!')
 
 root = Window(themename='solar')
 root.title('MoziTown')

@@ -9,10 +9,12 @@ import os
 import time
 from fpdf import FPDF
 import random as r
+import plotly.express as px
+import pandas as pd
+import numpy as np
+import plotly.io as pio
 
 global count11,count21,count31,count41,count51,count61,count71,count81,count91,count12,count22,count32,count42,count52,count62,count72,count82,count92,count13,count23,count33,count43,count53,count63,count73,count83,count93,count14,count24,count34,count44,count54,count64,count74,count84,count94,count15,count25,count35,count45,count55,count65,count75,count85,count95,countblock, szamolo, ulohelyek, idopont
-
-global isblue11,isblue21,isblue31,isblue41,isblue51,isblue61,isblue71,isblue81,isblue91,isblue12,isblue22,isblue32,isblue42,isblue52,isblue62,isblue72,isblue82,isblue92,isblue13,isblue23,isblue33,isblue43,isblue53,isblue63,isblue73,isblue83,isblue93,isblue14,isblue24,isblue34,isblue44,isblue54,isblue64,isblue74,isblue84,isblue94,isblue15,isblue25,isblue35,isblue45,isblue55,isblue65,isblue75,isblue85,isblue95,isblueblock
 
 szamolo = 0
 ulohelyek = 0
@@ -21,7 +23,36 @@ idopont = '00:00'
 idopontok = ['11:30', '13:30', '16:30', '17:00', '17:30', '18:00', '19:30', '20:30', '22:30']
 count11,count21,count31,count41,count51,count61,count71,count81,count91,count12,count22,count32,count42,count52,count62,count72,count82,count92,count13,count23,count33,count43,count53,count63,count73,count83,count93,count14,count24,count34,count44,count54,count64,count74,count84,count94,count15,count25,count35,count45,count55,count65,count75,count85,count95,countblock = 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 
-isblue11,isblue21,isblue31,isblue41,isblue51,isblue61,isblue71,isblue81,isblue91,isblue12,isblue22,isblue32,isblue42,isblue52,isblue62,isblue72,isblue82,isblue92,isblue13,isblue23,isblue33,isblue43,isblue53,isblue63,isblue73,isblue83,isblue93,isblue14,isblue24,isblue34,isblue44,isblue54,isblue64,isblue74,isblue84,isblue94,isblue15,isblue25,isblue35,isblue45,isblue55,isblue65,isblue75,isblue85,isblue95,isblueblock = False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False
+
+def statics():
+    movies = ['A méhész', 'Demon Slayer: To the Hashira Training', 'Dűne: Második rész', 'Madame Web', 'Imádlak utálni']
+    booking_counts = [42, 22, 33, 14, 15]
+    seats = np.arange(1, 46).reshape((5, 9))
+    seat_occupancy = np.random.choice([0, 1], size=(5, 9), p=[0.3, 0.7])
+    booking_times = pd.date_range(start='2023-03-01', periods=100, freq='D')
+    bookings_over_time = np.random.poisson(lam=5, size=100)
+
+    booking_data = pd.DataFrame({
+        'Filmek': movies,
+        'Foglalások': booking_counts
+    })
+
+    heatmap_data = pd.DataFrame(seat_occupancy, columns=[f"Szék {i+1}" for i in range(9)], index=[f"Sor {i+1}" for i in range(5)])
+
+    time_series_data = pd.DataFrame({
+        'Dátum': booking_times,
+        'Foglalások': bookings_over_time
+    })
+
+    fig_bar = px.bar(booking_data, x='Filmek', y='Foglalások', title='Foglaltság', labels={'Foglalások': 'Foglaltság'})
+    pio.write_image(fig_bar, './imgs/filmenkentifoglaltsag.png')
+
+    fig_heatmap = px.imshow(seat_occupancy, labels=dict(x="Szék szám", y="Sor szám", color="Foglaltság"), 
+                            x=[f"Szék {i+1}" for i in range(9)], y=[f"Sor {i+1}" for i in range(5)], title="Foglalási statisztika")
+    pio.write_image(fig_heatmap, './imgs/foglaltsag.png')
+
+    fig_line = px.line(time_series_data, x='Dátum', y='Foglalások', title='Foglalások', labels={'Foglalások': 'Foglaltság'})
+    pio.write_image(fig_line, './imgs/idoszerint.png')
 
 def getpath():
     path = os.path.abspath(os.getcwd())
@@ -707,6 +738,7 @@ def btnclick(z):
 
 def pdfjegy():
     global szamolo, idopont, ulohelyek, cal
+    statics()
     if idopont != '00:00' and ulohelyek>0:
         if szamolo==0:
             pdf = FPDF()
@@ -805,7 +837,6 @@ resized_logo = logoimg.resize((500,500))
 displaylogo = ImageTk.PhotoImage(resized_logo)
 logo = Label(root, image=displaylogo)
 logo.pack()
-
 
 mystyle = Style()
 mystyle.configure("success.Outline.TButton", font=("Helvetica", 24))
